@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zeeshan Computer Academy</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at 20% 20%, #000814, #001233, #000814 90%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Floating particles background */
+  @keyframes floatParticles {
+    0% { transform: translateY(0) translateX(0); opacity: 0.6; }
+    50% { transform: translateY(-20px) translateX(15px); opacity: 1; }
+    100% { transform: translateY(0) translateX(0); opacity: 0.6; }
+  }
+
+  .particle {
+    position: fixed;
+    width: 6px;
+    height: 6px;
+    background: rgba(0, 255, 255, 0.8);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffff;
+    animation: floatParticles 5s ease-in-out infinite;
+    z-index: 0;
+  }
+
+  .particle:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+  .particle:nth-child(2) { top: 30%; left: 75%; animation-delay: 1s; }
+  .particle:nth-child(3) { top: 50%; left: 40%; animation-delay: 2s; }
+  .particle:nth-child(4) { top: 70%; left: 60%; animation-delay: 3s; }
+  .particle:nth-child(5) { top: 80%; left: 20%; animation-delay: 4s; }
+
+  /* Container Grid */
+  .container {
+    display: grid;
+    grid-template-areas:
+      "header header"
+      "menu content"
+      "footer footer";
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    padding: 25px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Header */
+  .header {
+    grid-area: header;
+    background: linear-gradient(145deg, rgba(0, 20, 40, 0.9), rgba(0, 45, 75, 0.85));
+    border: 2px solid rgba(0, 255, 255, 0.3);
+    color: white;
+    text-align: center;
+    padding: 60px 15px;
+    border-radius: 25px;
+    box-shadow: 0 0 50px rgba(0, 255, 255, 0.3);
+    overflow: hidden;
+    backdrop-filter: blur(15px);
+    position: relative;
+  }
+
+  .header::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    background: conic-gradient(from 0deg, #00ffff, transparent, #0072ff, transparent);
+    animation: rotate 12s linear infinite;
+    opacity: 0.25;
+  }
+
+  @keyframes rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  .header h1 {
+    font-size: 50px;
+    letter-spacing: 3px;
+    color: #00e6ff;
+    text-transform: uppercase;
+    text-shadow: 0 0 25px #00ffff;
+    animation: fadeSlide 1.5s ease forwards;
+    z-index: 1;
+    position: relative;
+  }
+
+  .header h1 span {
+    display: block;
+    font-size: 38px;
+    background: linear-gradient(90deg, #00f0ff, #00ffcc, #00ffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: glowPulse 3s infinite alternate;
+  }
+
+  @keyframes glowPulse {
+    from { text-shadow: 0 0 15px #00ffff; }
+    to { text-shadow: 0 0 45px #00ffff, 0 0 80px #00ffff; }
+  }
+
+  @keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(-40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .underline {
+    width: 280px;
+    height: 4px;
+    margin: 18px auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #ff00ff, #00e6ff, #0072ff);
+    animation: gradientFlow 3s linear infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0 0; }
+    100% { background-position: 280px 0; }
+  }
+
+  /* Menu */
+  .menu {
+    grid-area: menu;
+    background: rgba(0, 25, 40, 0.65);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(0, 255, 255, 0.25);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    transform: translateX(-50px);
+    opacity: 0;
+    animation: menuSlide 1.5s ease forwards 0.5s;
+  }
+
+  @keyframes menuSlide {
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  .menu a {
+    display: block;
+    color: #00ffff;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 18px 0;
+    padding: 12px;
+    border-radius: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s ease;
+  }
+
+  .menu a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(0,255,255,0.4), transparent);
+    transition: 0.6s;
+  }
+
+  .menu a:hover::before {
+    left: 100%;
+  }
+
+  .menu a:hover {
+    background: linear-gradient(90deg, #00ffff, #0072ff);
+    color: black;
+    box-shadow: 0 0 30px #00ffff;
+    transform: translateX(8px) scale(1.05);
+  }
+
+  /* Content */
+  .content {
+    grid-area: content;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.15);
+    animation: fadeIn 1.5s ease 0.8s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 35px rgba(0,255,255,0.15);
+    transition: 0.4s ease;
+  }
+
+  iframe:hover {
+    box-shadow: 0 0 50px rgba(0,255,255,0.35);
+    transform: scale(1.01);
+  }
+
+  /* Footer */
+  .footer {
+    grid-area: footer;
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 20, 40, 0.85);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    color: #00ffff;
+    font-weight: 600;
+    text-shadow: 0 0 12px #00ffff;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.25);
+    animation: fadeIn 1.5s ease 1.2s both;
+  }
+
+  .footer:hover {
+    text-shadow: 0 0 20px #00ffff;
+    letter-spacing: 1px;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- Floating particles -->
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+<div class="particle"></div>
+
+<div class="container">
+  <div class="header">
+    <h1>Welcome TO<br><span>Zeeshan Computer Academy</span></h1>
+    <div class="underline"></div>
+  </div>
+
+  <div class="menu">
+    <a href="intro.html" target="contentFrame">Introduction</a>
+    <a href="gala.html" target="contentFrame">Gallery</a>
+    <a href="fromi.html" target="contentFrame">Admission Form</a>
+    <a href="about.html" target="contentFrame">About</a>
+    <a href="cont.html" target="contentFrame">Contact</a>
+  </div>
+
+  <div class="content">
+    <iframe name="contentFrame"></iframe>
+  </div>
+
+  <div class="footer">
+    © 2025 Zeeshan Computer Academy | Email: info@zeeshanacademy.com | Phone: +92 312 9737846
+  </div>
+</div>
+
+</body>
+</html>
